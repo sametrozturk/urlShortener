@@ -5,43 +5,23 @@ This is a simple URL shortening service implemented as a standalone .NET applica
 ## Installation and Usage
 
 1. Clone this repository.
-2.  **To use the embedded SQLite database instead of MSSQL, switch to the `sqlite` branch using the following command:**
-
-    ```shell
-    git checkout sqlite
-    ```
-3. **Run the following command in the NuGet Package Manager Console to create or update the SQLite database:**
+2. **Run the following command in the NuGet Package Manager Console to create or update the SQLite database:**
 
     ```shell
     update-database
-    ```    
-5. Navigate to the `urlShortener\src\Presentation\Api` directory and locate the `appsettings.json` file.
-6. Configure the database connection in the `appsettings.json` file under the `ConnectionStrings` section:
+    ```
+    **Warning:**
 
-    **Note:** If you want to disable certificate validation when connecting to SQL Server, add the following to your connection string: `TrustServerCertificate=true;`
-        
-    ```json
-    {
-      "ConnectionStrings": {
-        "DefaultConnection": "your_connection_string_here"
-      },
-      "Logging": {
-        "LogLevel": {
-          "Default": "Information",
-          "Microsoft.AspNetCore": "Warning"
-        }
-      },
-      "AllowedHosts": "*"
-    }
+    Running the `update-database` command in the NuGet Package Manager Console will create or update the SQLite database. Ensure that you have selected "Api" as the default project before executing the command.
 
-7. Set Api as a Startup Project 
-8. Build and run the .NET application.
-9. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
+4. Set Api as a Startup Project.
+5. Build and run the .NET application.
+6. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
 
 ## Technologies Used
 
 - **.NET 7.0**: The application is built using .NET 7.0, a modern version of the .NET framework.
-- **Microsoft SQL Server**: MSSQL is used as the database to persist URL data.
+- **SQLite**: SQLite is used as the database to persist URL data.
 - **MediatR**: MediatR is used for implementing the Mediator pattern, enabling loose coupling between components.
 - **Domain-Driven Design (DDD)**: The project follows DDD principles for designing and organizing the codebase.
 
@@ -51,7 +31,6 @@ Takes a long URL and returns a much shorter URL.
 
 - The input URL must be in a valid format.
 - The maximum character length for the hash portion of the URL is limited to 6.
-- The service returns a meaningful message with a suitable HTTP status code.
 
 **Example:**
 
