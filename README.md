@@ -5,8 +5,18 @@ This is a simple URL shortening service implemented as a standalone .NET applica
 ## Installation and Usage
 
 1. Clone this repository.
-2. Navigate to the `urlShortener\src\Presentation\Api` directory and locate the `appsettings.json` file.
-3. Configure the database connection in the `appsettings.json` file under the `ConnectionStrings` section:
+2.  **To use the embedded SQLite database instead of MSSQL, switch to the `sqlite` branch using the following command:**
+
+    ```shell
+    git checkout sqlite
+    ```
+3. **Run the following command in the NuGet Package Manager Console to create or update the SQLite database:**
+
+    ```shell
+    update-database
+    ```    
+5. Navigate to the `urlShortener\src\Presentation\Api` directory and locate the `appsettings.json` file.
+6. Configure the database connection in the `appsettings.json` file under the `ConnectionStrings` section:
 
     **Note:** If you want to disable certificate validation when connecting to SQL Server, add the following to your connection string: `TrustServerCertificate=true;`
         
@@ -24,9 +34,9 @@ This is a simple URL shortening service implemented as a standalone .NET applica
       "AllowedHosts": "*"
     }
 
-4. Set Api as a Startup Project 
-5. Build and run the .NET application.
-6. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
+7. Set Api as a Startup Project 
+8. Build and run the .NET application.
+9. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
 
 ## Technologies Used
 
