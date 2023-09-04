@@ -23,9 +23,10 @@ This is a simple URL shortening service implemented as a standalone .NET applica
       },
       "AllowedHosts": "*"
     }
-    
-4. Build and run the .NET application.
-5. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
+
+4. Set Api as a Startup Project 
+5. Build and run the .NET application.
+6. Use the provided RESTful API endpoints to shorten URLs and perform redirection.
 
 ## Technologies Used
 
