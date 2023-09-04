@@ -95,6 +95,6 @@ Allows users to pick a custom shortened URL.
   
 ## Repository
 
-You can find the code and implementation details in [this GitHub repository](https://github.com/sametrozturk/UrlShortener).
+You can find the code and implementation details in [this GitHub repository](https://github.com/sametrozturk/urlShortener).
 
 Feel free to reach out if you have any questions or need further assistance with the implementation.
