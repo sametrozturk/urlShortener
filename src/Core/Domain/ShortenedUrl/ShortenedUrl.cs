@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Domain.ShortenedUrl;
+﻿namespace Domain.ShortenedUrl;
 
 public class ShortenedUrl
 {
 
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
     public string ApiHostUrl { get; private set; }
     public string GivenUrl { get; private set; }
     public string GivenUrlSchema { get; private set; }
@@ -13,7 +11,6 @@ public class ShortenedUrl
     public string GivenUrlRouteAndQuery { get; private set; }
     public string ShortUrl { get; private set; }
     public bool IsCustomHash { get; private set; }
-    [MaxLength(6)]
     public string Hash { get; private set; }
 
 
@@ -48,7 +45,6 @@ public class ShortenedUrl
         bool isCustomHash,
         string hash)
     {
-        this.Id = Guid.NewGuid();
         this.ApiHostUrl = apiHostUrl;
         this.GivenUrl = givenUrl;
         this.GivenUrlSchema = givenUrlSchema;

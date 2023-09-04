@@ -1,7 +1,4 @@
-﻿
-
-using Application.Common;
-using Application.Shared;
+﻿using Application.Common;
 using Domain.ResponseHandler;
 using Domain.ShortenedUrl;
 using Microsoft.EntityFrameworkCore;
@@ -10,14 +7,12 @@ namespace Persistence.Database;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-
     public DbSet<ShortenedUrl> ShortenedUrls { get; set; }
     public DbSet<ResponseMessage> ResponseMessages { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-      : base(options)
+        : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,12 +20,6 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<ShortenedUrl>(builder =>
-        {
-            builder.Property(s => s.Hash).HasMaxLength(ShortenedUrlConfig.Maxlength);
-            builder.Property(s => s.Hash).UseCollation("Latin1_General_CS_AS");
-        });
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -4,29 +4,33 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Database;
 
-namespace Persistence;
-
-public static class ServiceRegistration
+namespace Persistence
 {
-
-    public static void AddPersistenceServices(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static class ServiceRegistration
     {
-
-        serviceCollection.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-
-        serviceCollection.AddScoped<IApplicationDbContext>(provider =>
+        public static void AddPersistenceServices(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            var dbContext = provider.GetService<ApplicationDbContext>();
-            if (dbContext == null)
+            // Configure SQLite database
+            serviceCollection.AddDbContext<ApplicationDbContext>(options =>
             {
-                throw new InvalidOperationException("ApplicationDbContext is null.");
-            }
-            return dbContext;
-        });
+                options.UseSqlite(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
+                );
+            });
 
+            // Register the interface with the DbContext
+            serviceCollection.AddScoped(provider =>
+            {
+                var dbContext = provider.GetService<ApplicationDbContext>();
+                if (dbContext == null)
+                {
+                    throw new InvalidOperationException("ApplicationDbContext is null.");
+                }
+                return (IApplicationDbContext)dbContext;
+            });
+
+
+        }
     }
-
 }
